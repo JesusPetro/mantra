@@ -1,35 +1,16 @@
+
+---
+
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
 
 <!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
 [![Github contributors](https://img.shields.io/github/contributors/JesusPetro/mantra)](#)
 [![GitHub release date](https://img.shields.io/github/release-date/JesusPetro/mantra)](#)
 [![GitHub last commit](https://img.shields.io/github/last-commit/JesusPetro/mantra)](#)
 [![Free](https://img.shields.io/badge/free_for_non_commercial_use-brightgreen)](#-license)
 [![GitHub repo size](https://img.shields.io/github/repo-size/JesusPetro/mantra)](#)
 [![GitHub forks](https://img.shields.io/github/forks/JesusPetro/mantra)](#)
-
-[![Share](https://img.shields.io/badge/share-000000?logo=x&logoColor=white)](https://x.com/intent/tweet?text=Check%20out%20this%20project%20on%20GitHub:%20https://github.com/JesusPetro/mantra%20%23OpenIDConnect%20%23Security%20%23Authentication)
-[![Share](https://img.shields.io/badge/share-1877F2?logo=facebook&logoColor=white)](https://www.facebook.com/sharer/sharer.php?u=https://github.com/JesusPetro/mantra)
-[![Share](https://img.shields.io/badge/share-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/sharing/share-offsite/?url=https://github.com/JesusPetro/mantra)
-[![Share](https://img.shields.io/badge/share-FF4500?logo=reddit&logoColor=white)](https://www.reddit.com/submit?title=Check%20out%20this%20project%20on%20GitHub:%20https://github.com/JesusPetro/mantra)
-[![Share](https://img.shields.io/badge/share-0088CC?logo=telegram&logoColor=white)](https://t.me/share/url?url=https://github.com/JesusPetro/mantra&text=Check%20out%20this%20project%20on%20GitHub)
 
 :star: Star us on GitHub — it motivates us a lot!
 
@@ -40,343 +21,152 @@
     <img src="logo.png" alt="Logo" width="180" height="180">
   </a>
 
-<h3 align="center">Reconocimiento Ciudadano de las Transformaciones de Humedales en Colombia</h3>
+<h3 align="center">Data Preprocessing and Classification of Transient Light Curves</h3>
 
   <p align="center">
-    Descripción:
+    Description:
     <br />
-    <a href="https://docs.google.com/presentation/d/16weLUhh8QKx_lN8MphkURAA6tc8OO8Zn/edit#slide=id.p12"><strong>Explorar los documentos 📰</strong></a>
+    <h3 align="center"> This Python project processes astronomical light curve data to classify transient astronomical events like supernovae, variable stars, and active galactic nuclei (AGN). The workflow includes data reading, filtering, merging, and visualizing light curves for further analysis. </h3>
     <br />
-    <a href="https://wetland-io.vercel.app/"><strong>Aplicación web Wetland.io 🖥️</strong></a>
+    <a href="https://wetland-io.vercel.app/"><strong>Research Paper 📰</strong></a>
     <br />
   </p>
 </div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Tabla de contenidos</summary>
+  <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#sobre-el-proyecto">Sobre el proyecto</a>
+      <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#objetivos-del-proyecto">Objetivos del proyecto</a></li>
-        <li><a href="#objetivo-general">Objetivo general</a></li>
-        <li><a href="#objetivos-específicos">Objetivos especificos</a></li>
-        <li><a href="#funcionalidades">Funcionalidades</a></li>
-        <li><a href="#detalles-de-implementación">Detalles de Implementación</a></li>
-        <li><a href="#creado-con">Creado con</a></li>
+        <li><a href="#project-goals">Project Goals</a></li>
+        <li><a href="#general-objective">General Objective</a></li>
+        <li><a href="#specific-objectives">Specific Objectives</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#implementation-details">Implementation Details</a></li>
+        <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
     <li>
-      <a href="#Información-Técnica-sobre-Humedales-y-Sitios-Ramsar">Información Técnica sobre Humedales y Sitios Ramsar</a>
+      <a href="#technical-information">Technical Information</a>
       <ul>
-        <li><a href="#humedales">Humedales</a></li>
-        <li><a href="#sitios-ramsar">Sitios Ramsar</a></li>
+        <li><a href="#datasets">Datasets</a></li>
       </ul>
     </li>
     <li>
-      <a href="Impacto-y-Estrategia-de-Conservación">Impacto y Estrategia de Conservación</a>
+      <a href="#prerequisites">Prerequisites</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#Empoderamiento-Ciudadano">Empoderamiento Ciudadano</a></li>
-        <li><a href="#Incidencia-en-Políticas-Públicas">Incidencia en Políticas Públicas</a></li>
-        <li><a href="#Monitoreo-y-Seguimiento">Monitoreo-y-Seguimiento</a></li>
+        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#datasets-utilizados">Datasets Utilizados</a>
-    </li>
-    <li>
-      <a href="#requisitos-previos">Requisitos previos</a>
-    </li>
-    <li>
-      <a href="#primeros-pasos">Primeros pasos</a>
-      <ul>
-        <li><a href="#instalación">Instalación</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#despliegue-en-vercel">Despliegue en Vercel</a>
-    </li>
-    <li>
-      <a href="#aprende-más">Aprende más</a>
-    </li>
-    <li><a href="#contribuir">Contribuir</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-    <li><a href="#agradecimientos">Agradecimientos</a></li>
+    <li><a href="#learn-more">Learn More</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
-
 <!-- ABOUT THE PROJECT -->
-##  Sobre el proyecto
+## About The Project
 
-<div align="center">
-  <a>
-    <img src="img.png" alt="Logo" width="1000" height="500">
-  </a>
-</div>
+This project focuses on the classification of transient astronomical events by processing light curve data from astronomical observations. It uses a Python-based workflow to handle raw data, filter it, and classify events like supernovae, variable stars, and AGNs. 
 
-Este proyecto tiene como objetivo generar conciencia ciudadana sobre los humedales en Colombia, sus posibles cambios y los factores de riesgo en su preservación. La aplicación digital permite la identificación de estas zonas, su ubicación respecto a áreas de actividad humana o zonas de protección ambiental y la visualización de su transformación en el tiempo.
+### Project Goals
+- Classify astronomical transient events using their light curves.
+- Automate data preprocessing, cleaning, and filtering.
+- Visualize light curves for a subset of the data.
 
-### Objetivos del Proyecto
-### Objetivo General
-Generar conciencia ciudadana sobre los humedales en Colombia y los factores de riesgo en su preservación mediante una herramienta amigable.
+### General Objective
+To accurately classify transient astronomical events and provide visualizations of the light curves for further analysis.
 
-### Objetivos Específicos
-- Clasificar humedales en Colombia según su ubicación en zonas de protección ambiental.
-- (Opcional) Clasificar los sitios Ramsar según la densidad de población en los municipios circundantes.
-- Construir timelapses de los cambios en los humedales usando datos disponibles en la red.
-- Crear una aplicación web con un mapa interactivo de Colombia para observar las regiones Ramsar y los timelapses.
+### Specific Objectives
+- Implement algorithms to classify light curves into transient event categories.
+- Generate clean datasets that can be used for scientific research.
+- Create visual representations of a subset of transient events.
 
-### Funcionalidades
-- Mapa interactivo de Colombia con la ubicación de los sitios Ramsar.
-- Visualización de timelapses de los humedales.
-- Clasificación de humedales según su proximidad a áreas protegidas y densidad de población.
+### Features
+- Automated light curve classification.
+- Data filtering and merging.
+- Light curve visualization.
+- Output datasets for future analysis.
 
+### Implementation Details
+This project is implemented in Python for data processing and classification, and uses Jupyter notebooks for data cleaning and visualization. The project includes custom-built scripts to read, filter, and merge light curve data. It also provides visualizations for selected transient events and saves the results as CSV files for further analysis.
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-### Detalles de Implementación
-
-Este proyecto utiliza Next.js para el frontend y Python para el procesamiento de datos y la generación de timelapses. La clasificación de humedales se realiza utilizando información tomada y analizada de los sitios web mencionados y la visualización de mapas se implementa con React.js.
-
-Los timelapses se generan utilizando la API de Google Earth Engine, procesando imágenes satelitales históricas para mostrar los cambios en los humedales a lo largo del tiempo.
-
-Para más detalles sobre la implementación, consulte los archivos de código fuente en el repositorio.
-
-Notebook data cleaning:
-
-<a target="_blank" href="https://colab.research.google.com/drive/1Xt5hMikcDaybIifIVriegwWJnDyPF7O3">
-  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-
-### Creado con
-
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Python][Python]][Python-url]
+### Built With
+* ![Python](https://img.shields.io/badge/python-%233776AB.svg?style=for-the-badge&logo=python&logoColor=white)
 * ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)
-* ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 
-## Información Técnica sobre Humedales y Sitios Ramsar
+<!-- TECHNICAL INFORMATION -->
+## Technical Information
 
-### Humedales
+### Datasets
+| Dataset                        | URL                                     | Description                                                                 |
+| ------------------------------ | --------------------------------------- | --------------------------------------------------------------------------- |
+| Light Curve Dataset             | https://github.com/MachineLearningUniandes/MANTRA/blob/master/data/lightcurves/transient_lightcurves.csv             | Dataset containing light curves for transient astronomical events            |
+| Classification Labels           | https://github.com/MachineLearningUniandes/MANTRA/blob/master/data/lightcurves/transient_labels.csv            | Labels for the classification of different transient events                  |
 
-Los humedales son ecosistemas que permanecen en condiciones de inundación o saturación por agua durante períodos considerables. Se caracterizan por:
+<!-- PREREQUISITES -->
+## Prerequisites
+Before getting started, ensure you have the following tools installed:
 
-1. Hidrología: Presencia de agua en la superficie o cerca de ella, de forma permanente o temporal.
-2. Suelos: Suelos hídricos que se desarrollan en condiciones de saturación.
-3. Vegetación: Plantas hidrófilas adaptadas a vivir en ambientes acuáticos o de suelos saturados.
+- Python 3.x
+- Jupyter Notebook
 
-Los humedales desempeñan funciones ecológicas cruciales:
-- Regulación hídrica
-- Hábitat para biodiversidad
-- Mitigación del cambio climático (sumideros de carbono)
-- Protección contra inundaciones y erosión costera
+<!-- GETTING STARTED -->
+## Getting Started
 
-### Sitios Ramsar
+To run the project locally, follow these steps:
 
-Los Sitios Ramsar son humedales de importancia internacional, designados bajo la Convención de Ramsar sobre los Humedales, un tratado intergubernamental adoptado en 1971. Un sitio Ramsar debe cumplir al menos uno de los nueve criterios de importancia internacional:
+### Installation
 
-1. Contiene un ejemplo representativo, raro o único de un tipo de humedal natural o casi natural en la región biogeográfica apropiada.
-2. Sustenta especies vulnerables, en peligro o en peligro crítico, o comunidades ecológicas amenazadas.
-3. Sustenta poblaciones de especies importantes para mantener la diversidad biológica de una región biogeográfica determinada.
-4. Sustenta especies en una etapa crítica de su ciclo biológico o les ofrece refugio en condiciones adversas.
-5. Sustenta de manera regular una población de 20,000 o más aves acuáticas.
-6. Sustenta de manera regular el 1% de los individuos de una población de una especie o subespecie de aves acuáticas.
-7. Sustenta una proporción significativa de subespecies, especies o familias de peces autóctonas, etapas del ciclo biológico, interacciones de especies y/o poblaciones representativas de los beneficios/valores de los humedales.
-8. Es una fuente de alimentación importante para peces, zona de desove, área de desarrollo y crecimiento y/o ruta migratoria de la que dependen las existencias de peces dentro o fuera del humedal.
-9. Sustenta habitualmente el 1% de los individuos de la población de una especie o subespecie dependiente de los humedales que sea una especie animal no aviaria.
+1. Clone the repository
+   ```bash
+   git clone https://github.com/JesusPetro/mantra.git
+   ```
 
-En Colombia, según los datos proporcionados por la pagina de [Ramsar Sites Information Service](https://rsis.ramsar.org), hay 11 sitios Ramsar que cubren un área total de 936,441.99 hectáreas.
+2. Install Python dependencies
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Impacto y Estrategia de Conservación
+3. Run the Jupyter Notebook for data preprocessing
+   ```bash
+   jupyter notebook
+   ```
 
-Nuestra aplicación no solo proporciona información, sino que también impulsa una estrategia integral para la preservación de los sitios RAMSAR en Colombia:
+<!-- LEARN MORE -->
+## Learn More
 
-### Empoderamiento Ciudadano
+For more information on this project, you can explore the following resources:
 
-Fomentamos una eduacación interactiva para que, a través de visualizaciones dinámicas y timelapses, los usuarios puedan comprender de manera tangible los cambios en los humedales a lo largo del tiempo.
-
-### Incidencia en Políticas Públicas
-
-Proporcionamos información actualizada y visual que puede ser utilizada por legisladores y funcionarios para fundamentar políticas de conservación. De esta forma se pueden hacer alertas tempranas gracias a la visualización actualizada de los humendales, facilitando la conexión entre comunidades locales, instituciones académicas y entidades gubernamentales para una gestión más efectiva.
-
-### Monitoreo y Seguimiento
-
-Desarrollamos métricas fáciles de entender que muestran el estado actual de cada sitio RAMSAR. Gracias a los timelapses y datos históricos permiten un seguimiento continuo de la evolución de estos ecosistemas.
-
-## Datasets Utilizados
-
-| Data                       | URL                | Description                                                                 |
-| -------------------------- | ------------------ | --------------------------------------------------------------------------- |
-| Sitios Ramsar en el mundo               | https://rsis.ramsar.org/ | Base de dato para obtener información sobre humedales y sitios ramsar en el mundo                                                           |
-| Geoportal del DANE                | https://geoportal.dane.gov.co/geovisores/sociedad/cnpv-2018/ |  Entidad responsable de la planeación, levantamiento, procesamiento, análisis y difusión de las estadísticas oficiales de Colombia.                       |
-| Departamentos y Ciudades de Colombia           | https://departamentosdecolombia.com/colombia/superficie/     | Información sobre departamentos, ciudades, zonas rurales y urbanas de Colombia                                        |
-| Google Earth Engine Timelapse                | https://earthengine.google.com/timelapse/  |             Earth Engine combina un catálogo de varios petabytes de imágenes de satélite y conjuntos de datos geoespaciales con capacidades de análisis a escala planetaria                                                  |
-
-## Requisitos previos
-
-Antes de empezar, comprueba que cumples los siguientes requisitos:
-
-- Tienes instalada versiónes recientes de `< Next.js / React.js >`.
-- Dispones de un equipo `<Windows / Linux / Mac>`.
-- Ha leído la `< https://nextjs.org/docs/ >`.
-
-## Primeros pasos
-
-Primero, ejecutar el servidor de desarrollo:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Abrir [http://localhost:3000](http://localhost:3000) con tu buscador para ver los resultados.
-
-Puede empezar a editar la página modificando `app/page.js`. La página se actualiza automáticamente a medida que editas el archivo.
-
-Este proyecto usa [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) para optimizar y cargar automáticamente Inter, una fuente personalizada de Google.
-
-## Despliegue en Vercel
-
-La forma más sencilla de desplegar la aplicación Next.js es utilizar el módulo [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) de los creadores de Next.js.
-
-## Aprende más
-
-Para saber más sobre Next.js, eche un vistazo a los siguientes recursos:
-
-- [Next.js Documentation](https://nextjs.org/docs) - conozca las características y la API de Next.js.
-- [Learn Next.js](https://nextjs.org/learn) - un tutorial interactivo de Next.js.
+- [Light Curve Astronomy](https://example.com/learning-resources)
 
 <!-- CONTRIBUTING -->
-## Contribuciones
+## Contributing
 
-Las contribuciones son lo que hace que la comunidad de código abierto sea un lugar increíble para aprender, inspirar y crear. Cualquier contribución que hagas será **muy apreciada**.
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
-Si tiene alguna sugerencia que pueda mejorar esto, por favor haga un fork del repositorio y cree un pull request. También puedes abrir una incidencia con la etiqueta «enhancement».
-No olvides darle una estrella al proyecto ⭐. Gracias de nuevo. :raised_hands:
+If you have a suggestion that would make this better, please fork the repo and create a pull request. 
 
-1. Fork al proyecto (https://github.com/David05R/wetland-recognition_CO-afina)
-2. Cree su rama de funciones (`git checkout -b feature/AmazingFeature`)
-3. Confirme sus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Haga un push a la rama(`git push origin feature/AmazingFeature`)
-5. Abrir una Pull Request
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 <!-- CONTACT -->
-## Contacto
+## Contact
 
-Para más detalles no dude en ponerse en contacto con nosotros. Estamos a su disposición para ayudarle y responder a sus preguntas. A continuación se indican las mejores formas de ponerse en contacto con nuestro equipo:
-
-* [📧](#) santiagoqp3103@gmail.com
-* [📧](#) herreraacevedodl@gmail.com
+* [📧](#) DavidSierra@gmail.com
+* [📧](#) Jesu@gmail.com
 * [📧](#) dvjruiz2003ybsj@gmail.com
-* [📧](#) isabellaarrietag@gmail.com
-* [📧](#) Vizcainoadrian2003@gmail.com
 
 <!-- ACKNOWLEDGMENTS -->
-## Agradecimientos 
-
-* [Ramsar Sites Information Service](https://rsis.ramsar.org/) por los datos de los sitios Ramsar.
-* [DANE](https://www.dane.gov.co/) por los datos demográficos y geoespaciales de Colombia.
-* [Google Earth Engine](https://earthengine.google.com/) por la plataforma de procesamiento de imágenes satelitales
-* [CoAfina 2024](https://laconga.redclara.net/hackathon/#/) y a los retadores que propusieron el reto por la oportunidad que nos dan al participar en este evento
-* Todos los contribuyentes que han participado en este proyecto.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Acknowledgments
 
 
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[Python]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
-[Python-url]: https://www.python.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
-
-
-
-
-
-
-# REFACTORED CODE
-
-
-este es el code refactorizado
-
-```
-Mantra
-│
-├── /data
-│   ├── /csv data
-│   │
-│   └── /data_transient
-│       ├── /AGN
-│       │   ├── /pdf
-│       │   └── /edgelist
-│       ├── /Blazar
-│       │   ├── /pdf
-│       │   └── /edgelist
-│       ├── /CV
-│       │   ├── /pdf
-│       │   └── /edgelist
-│       ├── /Flare
-│       │   ├── /pdf
-│       │   └── /edgelist
-│       ├── /HPM
-│       │   ├── /pdf
-│       │   └── /edgelist
-│       ├── /LPV
-│       │   ├── /pdf
-│       │   └── /edgelist
-│       ├── /SN
-│       │   ├── /pdf
-│       │   └── /edgelist
-│       └── /Var
-│           ├── /pdf
-│           └── /edgelist
-│
-├── /resultados
-│
-└── /scripts
-
-
-```
-
-esto es para petro: 
-```
-Set-ExecutionPolicy Unrestricted -Scope Process
-```
