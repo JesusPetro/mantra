@@ -163,7 +163,7 @@ If you have a suggestion that would make this better, please fork the repo and c
 ## Contact
 
 * [📧](#) DavidSierra@gmail.com
-* [📧](#) Jesu@gmail.com
+* [📧](#) petrojesus094@gmail.com
 * [📧](#) dvjruiz2003ybsj@gmail.com
 
 <!-- ACKNOWLEDGMENTS -->
