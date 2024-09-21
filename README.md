@@ -38,8 +38,6 @@ Mantra
 ├── /resultados
 │
 └── /scripts
-
-
 ```
 
 esto es para petro: 
