@@ -125,6 +125,7 @@ class GraphAnalyzer():
         plt.legend(title=r"$P(k)\sim x^{-\alpha_0}$")
         plt.grid(alpha=0.5)
         plt.show()
+        #prueba de commit
 
 if __name__ == '__main__':
     intento = GraphAnalyzer()
