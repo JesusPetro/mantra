@@ -54,7 +54,7 @@ class TransientDataLoader:
 
         self.type: str = type
 
-
+    
     @property
     def type(self):
         """
@@ -83,6 +83,7 @@ class TransientDataLoader:
         self.read_dataframe()
         # self.edgeList()
 
+
     def set_and_create_path(self):
         """
         Sets up file paths and creates necessary directories for transient data.
@@ -91,7 +92,7 @@ class TransientDataLoader:
         """
         self._pathData = f'../data/csv/{str(self._type)}.csv'
         self._path = f'../data/transient/{str(self._type)}/'
-        self._edgePath = f'{self._path}edgeList'
+        self._edgePath = f'{self._path}edgeList/'
         self._pdfPath = f'{self._path}pdf'
 
         # Create directories if they do not exist
@@ -184,8 +185,8 @@ class VisibilityGraphAnalyzer:
     plot_alpha_distribution(x0, y0, model, xlimi, xlims, color, name):
         Plots the degree distribution and fitted alpha line.
     """
-
-    def __init__(self, type: str ='', li_fit: float= 0, ls_fit: float = 0):
+    #TODO: ver lo de li_fit y ls_fit
+    def __init__(self, type: str ='', li_fit: float= 0, ls_fit: float = 2):
         """
         Constructs all the necessary attributes for the VisibilityGraphAnalyzer object.
 
@@ -256,6 +257,12 @@ class VisibilityGraphAnalyzer:
         """
         return self._values
 
+    def lista0 (self, lista1, lista2):
+        while 0 in lista1:
+            lista2.pop(lista1.index(0))
+            lista1.remove(0)
+        return lista1, lista2 
+
     def get_alpha(self, edgePath: str, id: int, name: str) -> tuple:
         """
         Calculates the alpha parameter for a visibility graph.
@@ -279,13 +286,24 @@ class VisibilityGraphAnalyzer:
 
         degree_count = nx.degree_histogram(G)
         degrees = list(range(0, len(degree_count)))
-
+        degree_count, degrees = self.lista0(degree_count, degrees)
+        
         degree_distribution = [count / float(sum(degree_count)) for count in degree_count]
-        x0, y0 = np.log10(degrees), np.log10(degree_distribution)
+        x0, y0 = np.array(np.log10(degrees)),np.array(np.log10(degree_distribution))
 
         x, y = x0[(x0 >= self.li_fit) & (x0 <= self.ls_fit)], y0[(x0 >= self.li_fit) & (x0 <= self.ls_fit)]
         x = sm.add_constant(x)
         model = sm.OLS(y, x).fit()
+
+        """
+            degree_distribution = [count/float(sum(degree_count)) for count in degree_count]
+            x0,y0=np.array(np.log10(degrees)),np.array(np.log10(degree_distribution))
+            x,y=x0[(x0>=li_fit)&(x0<=ls_fit)],y0[(x0>=li_fit)&(x0<=ls_fit)]
+
+
+            x = sm.add_constant(x)
+            model = sm.OLS(y, x).fit()
+        """
         alpha = -np.round(model.params[1], 2)
 
         self._alpha.append(alpha)
