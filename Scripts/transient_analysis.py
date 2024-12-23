@@ -67,6 +67,19 @@ class TransientDataLoader:
         """
         return self._type
 
+    @property
+    def edgePath(self):
+        """
+            Gets the EdgePath of transient data.
+
+            Returns
+            -------
+            str
+                The EdgePath of transient data.
+        """
+        return self._edgePath
+
+
     @type.setter
     def type(self, type):
         """
@@ -282,8 +295,9 @@ class VisibilityGraphAnalyzer:
             A tuple containing the degree (x0), degree distribution (y0), and the fitted model.
         """
         data_path = f'{edgePath}{id}'
+        print(data_path)
         G = nx.read_edgelist(data_path, nodetype=int)
-
+    
         degree_count = nx.degree_histogram(G)
         degrees = list(range(0, len(degree_count)))
         degree_count, degrees = self.lista0(degree_count, degrees)
@@ -346,5 +360,14 @@ class VisibilityGraphAnalyzer:
         plt.show()
 
 if __name__ == '__main__':
-    intento = TransientDataLoader(type='AGN')
-    print(intento.transient)
+    """ intento = TransientDataLoader(type='AGN')
+    print(intento.transient) """
+
+    intento = VisibilityGraphAnalyzer('AGN', 0.792, 1.416)
+    x = intento.get_alpha('../data/transient/AGN/edgeList/', 1312241350384110624, 'AGN')
+    print(x)
+    print(intento._values)
+    print(intento._alpha)
+
+
+
