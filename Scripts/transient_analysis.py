@@ -158,6 +158,7 @@ class TransientDataLoader:
 
         unique_ids = self.transient['ID'].unique()
         
+        
         for id in unique_ids :
             vec_id = self.transient[self.transient['ID'] == id]['Mag']
             graph_id = visibility_graph(vec_id)
@@ -214,12 +215,17 @@ class VisibilityGraphAnalyzer:
         """
         self._alpha: list = []
         self._values: list = []
+        self._x0 = []
+        self._y0 = []
+
+
         self._id = 0
+        self._model = 0
+        
         self.li_fit: float = li_fit
         self.ls_fit: float = ls_fit
 
-        self.type: str = type
-        self._type = type
+        self._type: str = type
 
     @property
     def alpha(self):
@@ -232,6 +238,20 @@ class VisibilityGraphAnalyzer:
             The list of alpha values.
         """
         return self._alpha
+    
+    
+    @property
+    def id (self):
+        """
+        Gets the id of transient data.
+
+        Returns
+        -------
+        str
+            The id of transient data.
+        """
+        return self._id
+    
     
     @property
     def type(self):
@@ -270,7 +290,47 @@ class VisibilityGraphAnalyzer:
         """
         return self._values
 
-    def lista0 (self, lista1, lista2):
+    @property 
+    def x0(self):
+        """
+        Gets the list of x0 values.
+
+        Returns
+        -------
+        list
+            The list of x0 values.
+        """
+        return self._x0
+    
+    @property 
+    def y0(self):
+        """
+        Gets the list of y0 values.
+
+        Returns
+        -------
+        list
+            The list of y0 values.
+        """
+        return self._y0
+
+    def remove_zeros (self, lista1, lista2):
+        """
+        Removes zeros from two related lists. The elements in `list2` are removed according to the indexes of the zeros in `list1`. 
+
+        Parameters
+        ----------
+        list1 : list
+            Main list from which zeros will be removed.
+        list2 : list
+            Secondary list from which corresponding elements will be removed.
+
+        Returns
+        -------
+        tuple
+            The filtered lists without zeros in `list1`.
+        """
+
         while 0 in lista1:
             lista2.pop(lista1.index(0))
             lista1.remove(0)
@@ -294,49 +354,42 @@ class VisibilityGraphAnalyzer:
         tuple
             A tuple containing the degree (x0), degree distribution (y0), and the fitted model.
         """
-        data_path = f'{edgePath}{id}'
-        print(data_path)
-        G = nx.read_edgelist(data_path, nodetype=int)
-    
-        degree_count = nx.degree_histogram(G)
-        degrees = list(range(0, len(degree_count)))
-        degree_count, degrees = self.lista0(degree_count, degrees)
+        try:
+            data_path = f'{edgePath}{id}'
+            # print(data_path)
+            G = nx.read_edgelist(data_path, nodetype=int)
         
-        degree_distribution = [count / float(sum(degree_count)) for count in degree_count]
-        x0, y0 = np.array(np.log10(degrees)),np.array(np.log10(degree_distribution))
+            degree_count = nx.degree_histogram(G)
+            degrees = list(range(0, len(degree_count)))
+            degree_count, degrees = self.remove_zeros(degree_count, degrees)
+            
+            degree_distribution = [count / float(sum(degree_count)) for count in degree_count]
+            self._x0, self._y0 = np.array(np.log10(degrees)),np.array(np.log10(degree_distribution))
 
-        x, y = x0[(x0 >= self.li_fit) & (x0 <= self.ls_fit)], y0[(x0 >= self.li_fit) & (x0 <= self.ls_fit)]
-        x = sm.add_constant(x)
-        model = sm.OLS(y, x).fit()
-
-        """
-            degree_distribution = [count/float(sum(degree_count)) for count in degree_count]
-            x0,y0=np.array(np.log10(degrees)),np.array(np.log10(degree_distribution))
-            x,y=x0[(x0>=li_fit)&(x0<=ls_fit)],y0[(x0>=li_fit)&(x0<=ls_fit)]
-
-
+            x, y = self._x0[(self._x0 >= self.li_fit) & (self._x0 <= self.ls_fit)], self._y0[(self._x0 >= self.li_fit) & (self._x0 <= self.ls_fit)]
             x = sm.add_constant(x)
-            model = sm.OLS(y, x).fit()
-        """
-        alpha = -np.round(model.params[1], 2)
+            self._model = sm.OLS(y, x).fit()
 
-        self._alpha.append(alpha)
-        self._values.append([name, id, alpha])
 
-        return x0, y0, model
+            alpha = -np.round(self._model.params[1], 2)
 
-    def plot_alpha_distribution(self, x0, y0, model, xlimi, xlims, color, name):
+            self._alpha.append(alpha)
+            self._values.append([name, id, alpha])
+            # return alpha
+        
+        except FileNotFoundError:
+            print(f'Error: File not found {data_path}')
+            return None
+
+        # return self._x0, self._y0, self._model
+
+    def plot_alpha_distribution(self, xlimi, xlims, color, name, save_path = None):
         """
         Plots the degree distribution along with the fitted alpha line.
+        Optionally saves the plot to a file.
 
         Parameters
         ----------
-        x0 : np.ndarray
-            The degree values (log10 scaled).
-        y0 : np.ndarray
-            The degree distribution values (log10 scaled).
-        model : sm.OLS
-            The fitted model for the degree distribution.
         xlimi : float
             The lower limit for the x-axis.
         xlims : float
@@ -345,29 +398,36 @@ class VisibilityGraphAnalyzer:
             The color for the plot.
         name : str
             The name of the graph or dataset.
+        save_path : str, optional
+            The file path to save the plot (default is None, which means the plot is shown instead of saved).
         """
         a = np.linspace(self.li_fit, self.ls_fit, 10)
         plt.figure(figsize=(6, 4))
-        plt.plot(x0, y0, color=color, linewidth=0, marker="P", markersize=5, label="data")
-        plt.plot(a, (a)*(model.params[1]) + model.params[0], color="k", lw=3,
-                 label=r"fit ($\alpha_0={}$)".format(-np.round(model.params[1], 2)))
+        plt.plot(self._x0, self._y0, color=color, linewidth=0, marker="P", markersize=5, label="data")
+        plt.plot(a, (a)*(self._model.params[1]) + self._model.params[0], color="k", lw=3,
+                 label=r"fit ($\alpha_0={}$)".format(-np.round(self._model.params[1], 2)))
         plt.xlabel(r'$\log_{10}(k)$ (Degree)')
         plt.ylabel(r'$\log_{10} P(k)$')
         plt.title(f'Degree Distribution for {name}')
         plt.xlim(xlimi, xlims)
         plt.grid(alpha=0.5)
         plt.legend()
-        plt.show()
+
+
+        if save_path:
+            plt.savefig(save_path, dpi = 300, bbox_inches = 'tight')
+        else:
+            plt.show()
 
 if __name__ == '__main__':
     """ intento = TransientDataLoader(type='AGN')
-    print(intento.transient) """
+    print(intento.transient)
+    print(len(intento.transient['ID'].unique()))
+    print(intento.transient['ID'].unique()) """
 
-    intento = VisibilityGraphAnalyzer('AGN', 0.792, 1.416)
-    x = intento.get_alpha('../data/transient/AGN/edgeList/', 1312241350384110624, 'AGN')
-    print(x)
-    print(intento._values)
-    print(intento._alpha)
-
+    """ intento = VisibilityGraphAnalyzer('AGN', 0.792, 1.416)
+    intento.get_alpha('../data/transient/AGN/edgeList/', 1205241210764128629, 'AGN')
+    print("\n\n\n\n")
+    intento.plot_alpha_distribution(0.26, 1.78, 'red', '1205241210764128629', '../data/transient/AGN/pdf/degree_distribution.png') """
 
 
