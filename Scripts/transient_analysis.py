@@ -107,6 +107,7 @@ class TransientDataLoader:
         self._path = f'../data/transient/{str(self._type)}/'
         self._edgePath = f'{self._path}edgeList/'
         self._pdfPath = f'{self._path}pdf'
+        #TODO: carpeta de natural y horizontal
 
         # Create directories if they do not exist
         directories = [self._path, self._edgePath, self._pdfPath]
@@ -382,8 +383,7 @@ class VisibilityGraphAnalyzer:
             return None
 
         # return self._x0, self._y0, self._model
-
-    def plot_alpha_distribution(self, xlimi, xlims, color, name, save_path = None):
+    def plot_alpha_distribution(self, xlimi, xlims, color, name, ax, save_path=None):
         """
         Plots the degree distribution along with the fitted alpha line.
         Optionally saves the plot to a file.
@@ -398,36 +398,42 @@ class VisibilityGraphAnalyzer:
             The color for the plot.
         name : str
             The name of the graph or dataset.
+        ax : matplotlib.axes._axes.Axes
+            The axis to plot on.
         save_path : str, optional
             The file path to save the plot (default is None, which means the plot is shown instead of saved).
         """
         a = np.linspace(self.li_fit, self.ls_fit, 10)
-        plt.figure(figsize=(6, 4))
-        plt.plot(self._x0, self._y0, color=color, linewidth=0, marker="P", markersize=5, label="data")
-        plt.plot(a, (a)*(self._model.params[1]) + self._model.params[0], color="k", lw=3,
-                 label=r"fit ($\alpha_0={}$)".format(-np.round(self._model.params[1], 2)))
-        plt.xlabel(r'$\log_{10}(k)$ (Degree)')
-        plt.ylabel(r'$\log_{10} P(k)$')
-        plt.title(f'Degree Distribution for {name}')
-        plt.xlim(xlimi, xlims)
-        plt.grid(alpha=0.5)
-        plt.legend()
-
+        ax.plot(self._x0, self._y0, color=color, linewidth=0, marker="P", markersize=5, label="data")
+        ax.plot(a, (a) * (self._model.params[1]) + self._model.params[0], color="k", lw=3,
+                label=r"fit ($\alpha_0={}$)".format(-np.round(self._model.params[1], 2)))
+        ax.set_xlabel(r'$\log_{10}(k)$ (Degree)')
+        ax.set_ylabel(r'$\log_{10} P(k)$')
+        ax.set_title(f'Degree Distribution for {name}')
+        ax.set_xlim(xlimi, xlims)
+        ax.grid(alpha=0.5)
+        ax.legend()
 
         if save_path:
-            plt.savefig(save_path, dpi = 300, bbox_inches = 'tight')
-        else:
-            plt.show()
+            plt.savefig(save_path, dpi=300, bbox_inches='tight')
 
 if __name__ == '__main__':
     """ intento = TransientDataLoader(type='AGN')
     print(intento.transient)
     print(len(intento.transient['ID'].unique()))
     print(intento.transient['ID'].unique()) """
+    
 
-    """ intento = VisibilityGraphAnalyzer('AGN', 0.792, 1.416)
-    intento.get_alpha('../data/transient/AGN/edgeList/', 1205241210764128629, 'AGN')
-    print("\n\n\n\n")
-    intento.plot_alpha_distribution(0.26, 1.78, 'red', '1205241210764128629', '../data/transient/AGN/pdf/degree_distribution.png') """
+    intento = VisibilityGraphAnalyzer('AGN', 0.8, 1.41)
+    intento.get_alpha('../data/transient/AGN/edgeList/', 1202251320404143265, 'AGN')
+    
 
 
+    fig, (aux1, aux2) = plt.subplots(1,2, figsize = (6,4))    
+    intento.plot_alpha_distribution(0.26, 1.78, 'red', 'AGN', aux1)    
+    intento.plot_alpha_distribution(0.26, 1.78, 'red','AGN', aux2)
+    plt.show()
+
+    
+
+#TODO: 1302141150504102321
