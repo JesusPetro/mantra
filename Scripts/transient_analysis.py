@@ -404,13 +404,14 @@ class VisibilityGraphAnalyzer:
             The file path to save the plot (default is None, which means the plot is shown instead of saved).
         """
         a = np.linspace(self.li_fit, self.ls_fit, 10)
+        # plt.figure(figsize=(6, 4))
         ax.plot(self._x0, self._y0, color=color, linewidth=0, marker="P", markersize=5, label="data")
         ax.plot(a, (a) * (self._model.params[1]) + self._model.params[0], color="k", lw=3,
                 label=r"fit ($\alpha_0={}$)".format(-np.round(self._model.params[1], 2)))
-        ax.set_xlabel(r'$\log_{10}(k)$ (Degree)')
-        ax.set_ylabel(r'$\log_{10} P(k)$')
-        ax.set_title(f'Degree Distribution for {name}')
-        ax.set_xlim(xlimi, xlims)
+        ax.xlabel(r'$\log_{10}(k)$ (Degree)')
+        ax.ylabel(r'$\log_{10} P(k)$')
+        ax.title(f'Degree Distribution for {name}')
+        ax.xlim(xlimi, xlims)
         ax.grid(alpha=0.5)
         ax.legend()
 
@@ -429,9 +430,12 @@ if __name__ == '__main__':
     
 
 
-    fig, (aux1, aux2) = plt.subplots(1,2, figsize = (6,4))    
-    intento.plot_alpha_distribution(0.26, 1.78, 'red', 'AGN', aux1)    
-    intento.plot_alpha_distribution(0.26, 1.78, 'red','AGN', aux2)
+    # fig, (aux1, aux2) = plt.subplots(1,2, figsize = (6,4))  
+    plt.subplot(1,3,1)
+    intento.plot_alpha_distribution(0.26, 1.78, 'red', 'AGN', plt)    
+    plt.subplot(1,3,2)
+    intento.plot_alpha_distribution(0.26, 1.78, 'red','AGN', plt)
+    plt.tight_layout()
     plt.show()
 
     
