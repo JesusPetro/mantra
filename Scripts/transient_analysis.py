@@ -7,6 +7,8 @@ import os
 import statsmodels.api as sm
 from visibility_graph import visibility_graph
 
+from ts2vg import NaturalVG, HorizontalVG
+
 class TransientDataLoader:
     """
     A class to load and manage transient data files.
@@ -20,6 +22,10 @@ class TransientDataLoader:
         The base path for storing transient data.
     _edgePath : str
         The path where edge list files will be stored.
+    _horizontalPath : str
+        the path where the result of the horizontal visibility graph will be stored
+    _NaturalPath : str
+        the path where the result of the Natural visibility graph will be stored
     _pdfPath : str
         The path where PDF files will be stored.
     _pathData : str
@@ -48,6 +54,8 @@ class TransientDataLoader:
         """
         self._path: str = ''
         self._edgePath: str = ''
+        self._horizontalPath: str = ''
+        self._naturalPath: str = ''
         self._pdfPath: str = ''
         self._pathData: str = ''
         self.transient: pd.DataFrame = None
@@ -105,14 +113,40 @@ class TransientDataLoader:
         """
         self._pathData = f'../data/csv/{str(self._type)}.csv'
         self._path = f'../data/transient/{str(self._type)}/'
-        self._edgePath = f'{self._path}edgeList/'
-        self._pdfPath = f'{self._path}pdf'
-        #TODO: carpeta de natural y horizontal
 
-        # Create directories if they do not exist
-        directories = [self._path, self._edgePath, self._pdfPath]
-        for directory in directories:
-            os.makedirs(directory, exist_ok=True)
+        # Use the helper function to set paths dynamically
+        self._edgePath = self.set_directory_path('edge')
+        self._horizontalPath = self.set_directory_path('horizontal')
+        self._naturalPath = self.set_directory_path('natural')
+        self._pdfPath = self.set_directory_path('pdf')
+
+    def set_directory_path(self, dir_type):
+        """
+        Helper function to set and create a directory path dynamically.
+
+        Parameters
+        ----------
+        dir_type : str
+            The type of directory ('edge', 'horizontal', 'natural', etc.).
+
+        Returns
+        -------
+        str
+            The full path of the directory.
+        """
+        dir_map = {
+            'edge': 'edgeList',
+            'horizontal': 'horizontalList',
+            'natural': 'naturalList',
+            'pdf': 'pdf'
+        }
+        if dir_type not in dir_map:
+            raise ValueError(f"Unknown directory type: {dir_type}")
+        
+        dir_path = f"{self._path}{dir_map[dir_type]}/"
+        os.makedirs(dir_path, exist_ok=True)
+        return dir_path
+
 
     def read_dataframe(self):
         """
@@ -122,7 +156,7 @@ class TransientDataLoader:
         """
         self.transient = pd.read_csv(self._pathData)
 
-    def edgeList(self):
+    def edgeList(self, type = None):
         """
         Generates a visibility graph from the transient data and writes it to an edge list file.
 
@@ -162,11 +196,24 @@ class TransientDataLoader:
         
         for id in unique_ids :
             vec_id = self.transient[self.transient['ID'] == id]['Mag']
-            graph_id = visibility_graph(vec_id)
             
             try:
-                nx.write_edgelist(graph_id, f'{self._edgePath}/{id}')
-                print(f'Edge list written for ID {id} at {self._edgePath}')
+                if type == 'Natural':
+                    vg = NaturalVG()
+                    vg.build(vec_id)
+                    graph_id = vg.as_networkx()
+                    Path = self._naturalPath
+                elif type == 'Horizontal': 
+                    vg = HorizontalVG()
+                    vg.build(vec_id)
+                    graph_id = vg.as_networkx()
+                    Path = self._horizontalPath
+                else: 
+                    graph_id = visibility_graph(vec_id)
+                    Path = self._edgePath
+
+                nx.write_edgelist(graph_id, f'{Path}/{id}')
+                print(f'Edge list written for ID {id} at {Path}')
                        
             except Exception as e:
                 print(f'Failed to write edge list for ID {id}: {str(e)}')
@@ -419,13 +466,12 @@ class VisibilityGraphAnalyzer:
             plt.savefig(save_path, dpi=300, bbox_inches='tight')
 
 if __name__ == '__main__':
-    """ intento = TransientDataLoader(type='AGN')
-    print(intento.transient)
-    print(len(intento.transient['ID'].unique()))
-    print(intento.transient['ID'].unique()) """
+    intento = TransientDataLoader(type='AGN')
+    # print(f'{intento._edgePath}, {intento._horizontalPath}, {intento._pdfPath}')
+    intento.edgeList('Natural')
     
 
-    intento = VisibilityGraphAnalyzer('AGN', 0.8, 1.41)
+    """ intento = VisibilityGraphAnalyzer('AGN', 0.8, 1.41)
     intento.get_alpha('../data/transient/AGN/edgeList/', 1202251320404143265, 'AGN')
     
 
@@ -436,7 +482,7 @@ if __name__ == '__main__':
     plt.subplot(1,3,2)
     intento.plot_alpha_distribution(0.26, 1.78, 'red','AGN', plt)
     plt.tight_layout()
-    plt.show()
+    plt.show() """
 
     
 
